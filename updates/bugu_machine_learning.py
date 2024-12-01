@@ -48,7 +48,8 @@ def AdaBoost(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+   
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def LinearRegressionModel(df):
     n = len(df)
@@ -86,7 +87,7 @@ def LinearRegressionModel(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def DecisionTree(df):
     n = len(df)
@@ -124,7 +125,7 @@ def DecisionTree(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def Bagging(df):
     n = len(df)
@@ -160,7 +161,7 @@ def Bagging(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def RandomForest(df):
     n = len(df)
@@ -196,7 +197,7 @@ def RandomForest(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def RidgeModel(df):
     n = len(df)
@@ -232,7 +233,7 @@ def RidgeModel(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def ExtraTrees(df):
     n = len(df)
@@ -268,7 +269,7 @@ def ExtraTrees(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def GradientBoosting(df):
     n = len(df)
@@ -304,7 +305,7 @@ def GradientBoosting(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def Bagging_Simple(df):
     n = len(df)
@@ -340,7 +341,7 @@ def Bagging_Simple(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def RandomForest_Simple(df):
     n = len(df)
@@ -376,7 +377,7 @@ def RandomForest_Simple(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 def AdaBoost_Simple(df):
     n = len(df)
@@ -416,7 +417,7 @@ def AdaBoost_Simple(df):
     print(f"Close: accuracy {close_score*100:.2f}%, current {df['close'].values[-1]}, predicted {prediction_close}")
     print(f"Low: accuracy {low_score*100:.2f}%, current {df['low'].values[-1]}, predicted {prediction_low}")
 
-    return prediction_high, prediction_low, prediction_close
+    return prediction_high, high_score, prediction_low, low_score, prediction_close, close_score
 
 class TensorflowNN:
     def __init__(self, df, plotting=None):
@@ -482,7 +483,7 @@ class TensorflowNN:
 
         # Calculate prediction accuracy (mean absolute percentage error)
         self.mape = np.mean(np.abs((self.y_test_inv - self.y_pred_inv) / self.y_test_inv)) * 100
-        print(f'Prediction MAPE: {self.mape:.2f}%')
+        print(f'prediction MAPE: {self.mape:.2f}%')
 
     def plot_results(self):
         if self.plotting:
@@ -531,7 +532,7 @@ def ada_boost_r(df):
         
     prediction = model.predict(df[['open', 'high', 'low', 'tick_volume']][n-1:])
     print("AdaBoost predicted close for next candle: ", prediction)
-    return prediction
+    return prediction, score
 
     
 def random_forest_r(df):
@@ -549,4 +550,4 @@ def random_forest_r(df):
 
     prediction = model.predict(df[['open', 'high', 'low', 'tick_volume']][n-1:])
     print("RandomForest predicted close for next candle: ", prediction)
-    return prediction
+    return prediction, score
